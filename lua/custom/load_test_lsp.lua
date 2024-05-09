@@ -1,6 +1,6 @@
 local client = vim.lsp.start_client {
-  name = 'db_notebook_lsp',
-  cmd = { vim.fn.expand '%:p' .. 'lsp/db_notebook_lsp' },
+  name = 'myfirstlsp',
+  cmd = { '/Users/roberthorbury/.config/nvim/lsp/main' },
 }
 
 if not client then

@@ -25,7 +25,7 @@ jobs:
         TOKEN: ${{ secrets.TOKEN }}
       run: |
         mkdir -p ./lsp
-        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/main -o "./lsp/db_notebook_lsp"
+        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/main -o "./lsp/main"
     
     - name: Make binary executable
       run: chmod +x ./lsp/db_notebook_lsp
