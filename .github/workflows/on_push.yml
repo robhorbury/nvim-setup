@@ -24,7 +24,7 @@ jobs:
       env:
       TOKEN: ${{ secrets.repo_token }}
       run: |
-        curl -H "Authorization: token ${TOKEN}" https://github.com/robhorbury/db_notebook_lsp/blob/main/main
+        curl -H "Authorization: token ${{ secrets.TOKEN }} https://github.com/robhorbury/db_notebook_lsp/blob/main/main
 
     - name: setup git config
       run: |
