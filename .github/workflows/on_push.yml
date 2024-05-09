@@ -18,13 +18,13 @@ jobs:
       id: extract_branch
 
     - name: Print brach
-      run: echo "${{ steps.extract_branch.outputs.branch }}"
+      run: echo "${{ steps.extract_branch.outputs.branch }}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/main
 
     - name: get file
       env:
         TOKEN: ${{ secrets.TOKEN }}
       run: |
-        curl -H "Authorization: token ${TOKEN}" https://github.com/robhorbury/db_notebook_lsp/blob/main/main
+        curl -H "Authorization: token ${TOKEN}" 
 
     - name: setup git config
       run: |
