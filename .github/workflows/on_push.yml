@@ -28,7 +28,7 @@ jobs:
         curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/main -o "./lsp/main"
     
     - name: Make binary executable
-      run: chmod +x ./lsp/db_notebook_lsp
+      run: chmod +x ./lsp/main
     
     - name: setup git config
       run: |
