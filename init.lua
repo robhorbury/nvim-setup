@@ -1,5 +1,5 @@
 --[[
-
+--
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -176,10 +176,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -256,6 +256,12 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+  },
+
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -566,7 +572,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -729,7 +735,7 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<Enter>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
@@ -740,7 +746,7 @@ require('lazy').setup({
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
-          ['<C-Space>'] = cmp.mapping.complete {},
+          ['<C-c>'] = cmp.mapping.complete {},
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
@@ -792,7 +798,80 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      signs = false, -- show icons in the signs column
+      --sign_priority = 8, -- sign priority
+      -- keywords recognized as todo comments
+      keywords = {
+        FIX = {
+          icon = ' ', -- icon used for the sign, and in search results
+          color = 'error', -- can be a hex color, or a named color (see below)
+          alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' }, -- a set of other keywords that all map to this FIX keywords
+          -- signs = false, -- configure signs for some keywords individually
+        },
+        TODO = { icon = ' ', color = 'info' },
+        HACK = { icon = ' ', color = 'warning' },
+        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+        PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
+        NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
+        TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
+        -- MAGIC = { color = 'magic' },
+        COMMAND = { color = 'command' },
+        DBNOTEBOOK = { color = 'command', alt = { 'Databricks notebook source' } },
+      },
+      gui_style = {
+        fg = 'NONE', -- The gui style to use for the fg highlight group.
+        bg = 'BOLD', -- The gui style to use for the bg highlight group.
+      },
+      merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+      -- highlighting of the line containing the todo comment
+      -- * before: highlights before the keyword (typically comment characters)
+      -- * keyword: highlights of the keyword
+      -- * after: highlights after the keyword (todo text)
+      highlight = {
+        multiline = false, -- enable multine todo comments
+        multiline_pattern = '', -- lua pattern to match the next multiline from the start of the matched keyword
+        multiline_context = 0, -- extra lines that will be re-evaluated when changing a line
+        before = '', -- "fg" or "bg" or empty
+        keyword = 'bg', -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+        after = 'fg', -- "fg" or "bg" or empty
+        pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlighting (vim regex)
+        comments_only = true, -- uses treesitter to match keywords in comments only
+        max_line_len = 400, -- ignore lines longer than this
+        exclude = {}, -- list of file types to exclude highlighting
+      },
+      -- list of named colors where we try to extract the guifg from the
+      -- list of highlight groups or use the hex color if hl not found as a fallback
+      colors = {
+        error = { 'DiagnosticError', 'ErrorMsg', '#DC2626' },
+        warning = { 'DiagnosticWarn', 'WarningMsg', '#FBBF24' },
+        info = { 'DiagnosticInfo', '#2563EB' },
+        hint = { 'DiagnosticHint', '#10B981' },
+        default = { 'Identifier', '#7C3AED' },
+        test = { 'Identifier', '#FF00FF' },
+        magic = { 'Magic', '#FFFFFF' },
+        command = { 'Command', '#99ff99' },
+      },
+      search = {
+        command = 'rg',
+        args = {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+        },
+        -- regex that will be used to match keywords.
+        -- don't replace the (KEYWORDS) placeholder
+        pattern = [[\b(KEYWORDS)]], -- ripgrep regex
+        -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+      },
+    },
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -835,7 +914,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'python' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -878,7 +957,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -907,6 +986,8 @@ require('lazy').setup({
     },
   },
 })
+
+require 'custom.init'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
