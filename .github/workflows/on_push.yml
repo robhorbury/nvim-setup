@@ -1,0 +1,40 @@
+name: Build and run dependency logger
+
+on: push
+permissions:
+  contents: write
+
+jobs:
+
+  get_lsp:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
+
+    - name: Print brach
+      run: echo "${{ steps.extract_branch.outputs.branch }}"
+
+    - name: get file
+      env:
+      TOKEN: ${{ secrets.repo_token }}
+      run: |
+        curl -H "Authorization: token ${TOKEN}" https://github.com/robhorbury/db_notebook_lsp/blob/main/main
+
+    - name: setup git config
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+
+    - name: Commit files # commit the output folder
+      run: |
+        git add .
+        git commit -m "Added built go files"
+        git push origin ${{ steps.extract_branch.outputs.branch }}
+
+
