@@ -26,8 +26,8 @@ jobs:
       run: |
         mkdir -p ./lsp/windows
         mkdir -p ./lsp/mac
-        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/buid/mac/main -o "./lsp/mac/main"
-        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/buid/windows/main.exe -o "./lsp/windows/main.exe"
+        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/build/mac/main -o "./lsp/mac/main"
+        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/robhorbury/db_notebook_lsp/main/build/windows/main.exe -o "./lsp/windows/main.exe"
 
     
     - name: Make binary executable
