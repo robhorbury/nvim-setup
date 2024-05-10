@@ -31,7 +31,10 @@ jobs:
 
     
     - name: Make binary executable
-      run: chmod +x ./lsp/main
+      run: chmod +x ./lsp/mac/main
+
+    - name: Make binary executable
+      run: chmod +x ./lsp/windows/main.exe
     
     - name: setup git config
       run: |

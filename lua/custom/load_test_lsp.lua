@@ -1,6 +1,6 @@
 local client = vim.lsp.start_client {
   name = 'myfirstlsp',
-  cmd = { '/Users/roberthorbury/.config/nvim/lsp/main' },
+  cmd = { '/Users/roberthorbury/.config/nvim/lsp/mac/main' },
 }
 
 if not client then
