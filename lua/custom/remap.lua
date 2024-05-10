@@ -28,3 +28,18 @@ vim.keymap.set('n', 'OO', 'O<Esc>')
 vim.keymap.set('n', '<leader>ga', function()
   vim.cmd 'G add .'
 end)
+
+vim.keymap.set('n', '<leader>g', function()
+  vim.cmd 'G'
+end)
+
+vim.keymap.set('n', '<leader>p[', function()
+  vim.cmd 'w'
+  vim.cmd 'G add .'
+  vim.cmd 'G commit -a'
+end)
+
+vim.keymap.set('n', '<leader>pl', function()
+  vim.cmd 'G fetch'
+  vim.cmd 'G pull'
+end)
