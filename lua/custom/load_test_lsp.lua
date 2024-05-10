@@ -1,6 +1,16 @@
+if vim.fn.exists 'g:os' == 0 then
+  local is_windows = vim.fn.has 'win64' == 1 or vim.fn.has 'win32' == 1 or vim.fn.has 'win16' == 1
+  if is_windows then
+    Path = vim.fn.expand '%:p:h' .. '/lsp/windows/main.exe'
+  else
+    Path = '/Users/roberthorbury/.config/nvim' .. '/lsp/mac/main'
+  end
+end
+
 local client = vim.lsp.start_client {
   name = 'myfirstlsp',
-  cmd = { '/Users/roberthorbury/.config/nvim/lsp/mac/main' },
+  --cmd = { '/Users/roberthorbury/.config/nvim/lsp/mac/main' },
+  cmd = { Path },
 }
 
 if not client then
