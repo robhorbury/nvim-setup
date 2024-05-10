@@ -21,3 +21,10 @@ end)
 vim.keymap.set('n', '<leader>e', function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
+
+vim.keymap.set('n', 'oo', 'o<Esc>')
+vim.keymap.set('n', 'OO', 'O<Esc>')
+
+vim.keymap.set('n', '<leader>ga', function()
+  vim.cmd 'G add .'
+end)

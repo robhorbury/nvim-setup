@@ -263,6 +263,10 @@ require('lazy').setup({
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
+  {
+    '/tpope/vim-fugitive',
+    branch = 'master',
+  },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
