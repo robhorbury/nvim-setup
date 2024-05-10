@@ -36,7 +36,6 @@ vim.keymap.set('n', '<leader>g', function()
 end)
 
 vim.keymap.set('n', '<leader>p[', function()
-  vim.cmd 'w'
   vim.cmd 'G add .'
   vim.cmd 'G commit -a'
 end)
@@ -44,6 +43,10 @@ end)
 vim.keymap.set('n', '<leader>pl', function()
   vim.cmd 'G fetch'
   vim.cmd 'G pull'
+end)
+
+vim.keymap.set('n', '<leader>pp', function()
+  vim.cmd 'G push'
 end)
 
 vim.keymap.set('n', '≠', ':resize -2<CR>')
