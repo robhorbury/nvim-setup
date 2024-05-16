@@ -59,3 +59,18 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
+
+vim.keymap.set('n', '<leader>v', '0vg_')
+
+local function set_diangnostics_keymap(on)
+  local dfilter = require 'custom.diagnostic_filter'
+  dfilter.spark_filter(on)
+end
+
+vim.keymap.set('n', '<leader>nn', function()
+  set_diangnostics_keymap(false)
+end)
+
+vim.keymap.set('n', '<leader>ne', function()
+  set_diangnostics_keymap(true)
+end)
