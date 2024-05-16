@@ -4,6 +4,8 @@ vim.keymap.set('n', '<leader>so', function()
   vim.cmd 'so'
 end)
 
+vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
+
 local o = vim.o
 
 o.expandtab = true
@@ -13,6 +15,13 @@ o.shiftwidth = 4
 
 local harpoon = require 'harpoon'
 harpoon:setup()
+
+vim.keymap.set({ 'n' }, '<leader>ww', '<C-w>w')
+vim.keymap.set('n', '<leader>wl', '<C-w>v')
+vim.keymap.set('n', '<leader>wk', '<C-w>s')
+vim.keymap.set('n', '<leader>wq', '<C-w>q')
+vim.keymap.set('n', '<leader>wL', '<C-w>L')
+vim.keymap.set('n', '<leader>wK', '<C-w>J')
 
 vim.keymap.set('n', '<leader>a', function()
   harpoon:list():add()
@@ -49,10 +58,10 @@ vim.keymap.set('n', '<leader>pp', function()
   vim.cmd 'G push'
 end)
 
-vim.keymap.set('n', '≠', ':resize -2<CR>')
-vim.keymap.set('n', '‘', ':resize +2<CR>')
-vim.keymap.set('n', 'æ', ':vertical resize -2<CR>')
-vim.keymap.set('n', '«', ':vertical resize +2<CR>')
+vim.keymap.set('n', '<up>', ':resize -5<CR>')
+vim.keymap.set('n', '<down>', ':resize +5<CR>')
+vim.keymap.set('n', '<left>', ':vertical resize -5<CR>')
+vim.keymap.set('n', '<right>', ':vertical resize +5<CR>')
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
@@ -61,6 +70,7 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 vim.keymap.set('n', '<leader>v', '0vg_')
+vim.keymap.set('n', '<leader>tt', ':vsplit +term<CR>')
 
 local function set_diangnostics_keymap(on)
   local dfilter = require 'custom.diagnostic_filter'
