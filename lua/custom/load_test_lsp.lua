@@ -6,7 +6,7 @@ if vim.fn.exists 'g:os' == 0 then
     Path = '/Users/roberthorbury/.config/nvim' .. '/lsp/mac/main'
   end
 
-  if not is_windows then
+  if not is_windows and is_windows then
     local client = vim.lsp.start_client {
       name = 'myfirstlsp',
       --cmd = { '/Users/roberthorbury/.config/nvim/lsp/mac/main' },

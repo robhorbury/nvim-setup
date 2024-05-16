@@ -267,6 +267,9 @@ require('lazy').setup({
     '/tpope/vim-fugitive',
     branch = 'master',
   },
+  {
+    'https://github.com/nvim-treesitter/playground',
+  },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -577,7 +580,6 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
-        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -823,7 +825,7 @@ require('lazy').setup({
         PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
         NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
         TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
-        -- MAGIC = { color = 'magic' },
+        --MAGIC = { color = 'magic' },
         COMMAND = { color = 'command' },
         DBNOTEBOOK = { color = 'command', alt = { 'Databricks notebook source' } },
       },
@@ -843,7 +845,7 @@ require('lazy').setup({
         before = '', -- "fg" or "bg" or empty
         keyword = 'bg', -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
         after = 'fg', -- "fg" or "bg" or empty
-        pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlighting (vim regex)
+        pattern = [[.*<(KEYWORDS)]], -- pattern or table of patterns, used for highlighting (vim regex)
         comments_only = true, -- uses treesitter to match keywords in comments only
         max_line_len = 400, -- ignore lines longer than this
         exclude = {}, -- list of file types to exclude highlighting
