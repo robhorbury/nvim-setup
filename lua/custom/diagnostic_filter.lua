@@ -6,7 +6,7 @@ local ns = vim.api.nvim_create_namespace 'my_diagnostics'
 local filter_diagnostics = function(diagnostics, on)
   local filtered_diag = {}
   for _, d in ipairs(diagnostics) do
-    if d.message ~= "undefined name 'spark'" and d.message ~= "undefined name 'dbutils'" and on == true then
+    if d.message ~= "undefined name 'spark'" and d.message ~= "undefined name 'dbutils'" and not string.find(d.message, 'display') and on == true then
       table.insert(filtered_diag, 1, d)
     elseif on == false then
       table.insert(filtered_diag, 1, d)

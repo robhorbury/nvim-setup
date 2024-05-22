@@ -362,15 +362,16 @@ require('lazy').setup({
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+      local actions = require 'telescope.actions'
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            n = { ['<leader>ll'] = actions.select_vertical, ['<leader>kk'] = actions.select_horizontal },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -580,6 +581,15 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
+        pylsp = {
+          settings = {
+            plugins = {
+              pycodestyle = {
+                maxLineLength = 100,
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -790,13 +800,13 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'rose-pine/neovim',
+    'rebelot/kanagawa.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'rose-pine'
+      vim.cmd.colorscheme 'kanagawa'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -825,7 +835,7 @@ require('lazy').setup({
         PERF = { icon = ' ', alt = { 'OPTIM', 'PERFORMANCE', 'OPTIMIZE' } },
         NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
         TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
-        --MAGIC = { color = 'magic' },
+        -- asdfqweasdqwejfvnurc = { color = 'magic', alt = { 'MAGIC %sql' } },
         COMMAND = { color = 'command' },
         DBNOTEBOOK = { color = 'command', alt = { 'Databricks notebook source' } },
       },

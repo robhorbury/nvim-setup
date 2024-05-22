@@ -6,13 +6,6 @@ end)
 
 vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
 
-local o = vim.o
-
-o.expandtab = true
-o.smartindent = true
-o.tabstop = 4
-o.shiftwidth = 4
-
 local harpoon = require 'harpoon'
 harpoon:setup()
 
