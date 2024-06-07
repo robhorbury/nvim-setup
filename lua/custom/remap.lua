@@ -37,13 +37,19 @@ vim.keymap.set('n', '<leader>g', function()
   vim.cmd 'G'
 end)
 
+vim.keymap.set('n', '<leader>gb', function()
+  vim.cmd 'G fetch -p'
+  vim.cmd 'G pull'
+  vim.cmd 'G branch -a'
+end)
+
 vim.keymap.set('n', '<leader>p[', function()
   vim.cmd 'G add .'
   vim.cmd 'G commit -a'
 end)
 
 vim.keymap.set('n', '<leader>pl', function()
-  vim.cmd 'G fetch'
+  vim.cmd 'G fetch -p'
   vim.cmd 'G pull'
 end)
 
