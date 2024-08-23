@@ -85,3 +85,7 @@ end)
 vim.keymap.set('n', '<leader>ne', function()
   set_diangnostics_keymap(true)
 end)
+
+vim.keymap.set('n', '<leader>di', function()
+  vim.cmd 'Gvdiffsplit HEAD'
+end)
