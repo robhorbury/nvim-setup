@@ -29,6 +29,9 @@ vim.keymap.set('n', '<leader>O', 'O<Esc>')
 vim.keymap.set('v', 'p', '"_dP')
 vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Esc' })
 
+vim.keymap.set('n', '<leader>d', '"_d')
+vim.keymap.set('v', '<leader>d', '"_d')
+
 vim.keymap.set('n', '<leader>ga', function()
   vim.cmd 'G add .'
 end)
@@ -88,4 +91,6 @@ end)
 
 vim.keymap.set('n', '<leader>di', function()
   vim.cmd 'Gvdiffsplit HEAD'
+  local keys = vim.api.nvim_replace_termcodes('<C-w>p', false, false, true)
+  vim.api.nvim_feedkeys(keys, 'n', true)
 end)
