@@ -270,6 +270,37 @@ require('lazy').setup({
   {
     'https://github.com/nvim-treesitter/playground',
   },
+  {
+    'pwntester/octo.nvim',
+    cmd = 'Octo',
+    event = { { event = 'BufReadCmd', pattern = 'octo://*' } },
+    opts = {
+      enable_builtin = true,
+      default_to_projects_v2 = true,
+      default_merge_method = 'squash',
+      picker = 'telescope',
+    },
+    keys = {
+      { '<leader>gi', '<cmd>Octo issue list<CR>', desc = 'List Issues (Octo)' },
+      { '<leader>gI', '<cmd>Octo issue search<CR>', desc = 'Search Issues (Octo)' },
+      { '<leader>gp', '<cmd>Octo pr list<CR>', desc = 'List PRs (Octo)' },
+      { '<leader>gP', '<cmd>Octo pr search<CR>', desc = 'Search PRs (Octo)' },
+      { '<leader>gr', '<cmd>Octo repo list<CR>', desc = 'List Repos (Octo)' },
+      { '<leader>gS', '<cmd>Octo search<CR>', desc = 'Search (Octo)' },
+      { '<leader>pr', '<cmd>Octo pr create<CR>' },
+
+      { '<leader>a', '', desc = '+assignee (Octo)', ft = 'octo' },
+      { '<leader>c', '', desc = '+comment/code (Octo)', ft = 'octo' },
+      { '<leader>l', '', desc = '+label (Octo)', ft = 'octo' },
+      { '<leader>i', '', desc = '+issue (Octo)', ft = 'octo' },
+      { '<leader>r', '', desc = '+react (Octo)', ft = 'octo' },
+      { '<leader>pa', '', desc = '+pr (Octo)', ft = 'octo' },
+      { '<leader>v', '', desc = '+review (Octo)', ft = 'octo' },
+      { '@', '@<C-x><C-o>', mode = 'i', ft = 'octo', silent = true },
+      { '#', '#<C-x><C-o>', mode = 'i', ft = 'octo', silent = true },
+    },
+  },
+  -- { 'https://github.com/kentkr/vim-databricks' },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -286,28 +317,28 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-      }
-      -- visual mode
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
-    end,
-  },
+  -- { -- Useful plugin to show you pending keybinds.
+  --   'folke/which-key.nvim',
+  --   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+  --   config = function() -- This is the function that runs, AFTER loading
+  --     require('which-key').setup()
+  --
+  --     -- Document existing key chains
+  --     require('which-key').register {
+  --       ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+  --       ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+  --       ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+  --       ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+  --       ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  --       ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+  --       ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+  --     }
+  --     -- visual mode
+  --     require('which-key').register({
+  --       ['<leader>h'] = { 'Git [H]unk' },
+  --     }, { mode = 'v' })
+  --   end,
+  -- },
 
   {
     'nvim-lualine/lualine.nvim',
@@ -586,6 +617,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
+
         pylsp = {
           cmd = { 'pylsp' },
           settings = {
@@ -594,10 +626,21 @@ require('lazy').setup({
                 enabled = true,
                 maxLineLength = 100,
               },
+              flake8 = {
+                enabled = true,
+                maxLineLength = 100,
+              },
+              black = {
+                enabled = true,
+              },
+              isort = {
+                enabled = true,
+              },
             },
           },
         },
-        rust_analyzer = {},
+
+        -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
