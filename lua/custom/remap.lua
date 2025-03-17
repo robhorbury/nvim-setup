@@ -94,3 +94,5 @@ vim.keymap.set('n', '<leader>di', function()
   local keys = vim.api.nvim_replace_termcodes('<C-w>p', false, false, true)
   vim.api.nvim_feedkeys(keys, 'n', true)
 end)
+
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
