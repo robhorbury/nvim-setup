@@ -36,3 +36,5 @@ vim.keymap.set('n', '<leader>yi', function()
   local clear_ref = vim.api.nvim_replace_termcodes(':<BS>', true, false, true)
   vim.api.nvim_feedkeys(clear_ref, 'n', false)
 end)
+
+vim.keymap.set('n', '<leader>pb', '<cmd>TermExec cmd="rm -rf dist/ | python -m build ." dir=git_dir<cr>')
