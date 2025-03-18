@@ -51,6 +51,11 @@ vim.keymap.set('n', '<leader>p[', function()
   vim.cmd 'G commit -a'
 end)
 
+vim.keymap.set('n', '<leader>p]', function()
+  vim.cmd 'G add .'
+  vim.cmd 'G commit -a --amend --no-edit'
+end)
+
 vim.keymap.set('n', '<leader>pl', function()
   vim.cmd 'G fetch -p'
   vim.cmd 'G pull'
