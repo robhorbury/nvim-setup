@@ -1,3 +1,18 @@
+if vim.fn.has 'win32' then
+  local bash_options = {
+    shell = 'bash.exe',
+    shellcmdflag = '--login -i -c',
+    shellredir = '',
+    shellpipe = '2>&1',
+    shellquote = '',
+    shellxquote = '',
+  }
+
+  for option, value in pairs(bash_options) do
+    vim.opt[option] = value
+  end
+end
+
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
 vim.keymap.set('n', '<leader>q', 'i<C-d>')
 vim.keymap.set('t', 'jj', [[<C-\><C-n>]])
@@ -17,6 +32,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 vim.keymap.set('n', '<leader>tk', '<cmd>ToggleTerm size=15 dir=git_dir direction=horizontal<cr>')
 vim.keymap.set('n', '<leader>tl', '<cmd>ToggleTerm size=70 dir=git_dir direction=vertical<cr>')
 vim.keymap.set('n', '<leader>tj', '<cmd>ToggleTerm dir=git_dir direction=float<cr>')
+
 vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTermToggleAll<cr>')
 vim.keymap.set('n', '<leader>ts', '<cmd>TermSelect<cr>')
 vim.keymap.set('n', '<leader>tn', '<cmd>TermNew<cr>')
