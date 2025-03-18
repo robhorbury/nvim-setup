@@ -264,7 +264,7 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
   {
-    '/tpope/vim-fugitive',
+    'tpope/vim-fugitive',
     branch = 'master',
   },
   {
@@ -350,6 +350,7 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
+  { 'ThePrimeagen/vim-be-good' },
 
   -- NOTE: Plugins can specify dependencies.
   --
@@ -627,20 +628,35 @@ require('lazy').setup({
         pylsp = {
           cmd = { 'pylsp' },
           settings = {
-            plugins = {
-              pycodestyle = {
-                enabled = true,
-                maxLineLength = 100,
+            pylsp = {
+              plugins = {
+                pycodestyle = {
+                  enabled = true,
+                  maxLineLength = 100,
+                },
+                ruff = {
+                  enabled = true, -- Enable the plugin
+                  formatEnabled = true, -- Enable formatting using ruffs formatter
+                  --cmd = 'python -m ruff',
+                  -- executable = 'C:/Users/RobertHorbury/AppData/Local/Programs/Python/Python311/Scripts/ruff', -- Custom path to ruff
+                  unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
+                  select = { 'E', 'F', 'UP', 'B', 'SIM', 'I', 'D', 'FIX' },
+                  format = { 'E', 'F', 'I' },
+                  ignore = { 'D212', 'D200', 'D415' },
+                  -- Rules that are ignored when a pyproject.toml or ruff.toml is present:
+                  lineLength = 100, -- Line length to pass to ruff checking and formatting
+                  targetVersion = 'py310', -- The minimum python version to target (applies for both linting and formatting).
+                },
               },
               flake8 = {
-                enabled = true,
+                enabled = false,
                 maxLineLength = 100,
               },
               black = {
-                enabled = true,
+                enabled = false,
               },
               isort = {
-                enabled = true,
+                enabled = false,
               },
             },
           },
