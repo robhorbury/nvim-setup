@@ -410,6 +410,13 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
+
+        pickers = {
+          find_files = {
+            find_command = { 'rg', '--files', '--sortr=modified' },
+          },
+        },
+
         defaults = {
           mappings = {
             n = { ['<leader>ll'] = actions.select_vertical, ['<leader>kk'] = actions.select_horizontal },
@@ -885,6 +892,7 @@ require('lazy').setup({
     end,
   },
   { 'f-person/git-blame.nvim' },
+  { 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
 
   -- Highlight todo, notes, etc in comments
   {
@@ -1003,7 +1011,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'python' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'python', 'sql' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1014,6 +1022,52 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      textobjects = {
+        select = {
+          enable = true,
+
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ag'] = '@class.outer',
+            -- You can optionally set descriptions to the mappings (used in the desc parameter of
+            -- nvim_buf_set_keymap) which plugins like which-key display
+            ['ig'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+          },
+        },
+
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            [']f'] = '@function.outer',
+            [']g'] = { query = '@class.outer', desc = 'Next class start' },
+            --
+          },
+          goto_next_end = {
+            [']F'] = '@function.outer',
+            [']G'] = '@class.outer',
+          },
+          goto_previous_start = {
+            ['[f'] = '@function.outer',
+            ['[g'] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[F'] = '@function.outer',
+            ['[G'] = '@class.outer',
+          },
+          -- Below will go to either the start or the end, whichever is closer.
+          -- Use if you want more granular movements
+          -- Make it even more gradual by adding multiple queries and regex.
+          goto_next = {
+            [']t'] = '@conditional.outer',
+          },
+          goto_previous = {
+            ['[t'] = '@conditional.outer',
+          },
+        },
+      },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
