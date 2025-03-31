@@ -77,7 +77,6 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 vim.keymap.set('n', '<leader>v', '0vg_')
-vim.keymap.set('n', '<leader>tt', ':vsplit +term<CR>')
 
 vim.keymap.set('v', '/', '*N<Esc>')
 

@@ -272,11 +272,6 @@ require('lazy').setup({
   },
   { 'https://github.com/mbbill/undotree' },
   {
-    'akinsho/toggleterm.nvim',
-    config = true,
-  },
-
-  {
     'pwntester/octo.nvim',
     cmd = 'Octo',
     event = { { event = 'BufReadCmd', pattern = 'octo://*' } },
