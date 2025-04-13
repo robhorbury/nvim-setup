@@ -22,16 +22,10 @@ local setup = function()
     callback = function(args)
       local ft = vim.bo.filetype
 
-      -- if ft == "yaml" then
-      --   local fileName = vim.api.nvim_buf_get_name(0)
-      --   vim.cmd(
-      --     ":!yamllint -c "
-      --       .. os.getenv "XDG_CONFIG_HOME"
-      --       .. "/yamllint/config/default "
-      --       .. fileName
-      --       .. " --format parsable"
-      --   )
-      -- end
+      if ft == "yaml" then
+        local fileName = vim.api.nvim_buf_get_name(0)
+        vim.cmd(":!yamllint " .. fileName)
+      end
 
       require("conform").format {
         bufnr = args.buf,

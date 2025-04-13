@@ -23,8 +23,6 @@ return {
       { "j-hui/fidget.nvim", opts = {} },
       { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
 
-      { "elixir-tools/elixir-tools.nvim" },
-
       -- Autoformatting
       "stevearc/conform.nvim",
 
@@ -32,8 +30,6 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
-      -- Don't do LSP stuff if we're in Obsidian Edit mode
-
       local extend = function(name, key, values)
         local mod = require(string.format("lspconfig.configs.%s", name))
         local default = mod.default_config
@@ -65,7 +61,16 @@ return {
       local lspconfig = require "lspconfig"
 
       local servers = {
-        codespell = {},
+        -- yamllint = {
+        --   filetypes = { "yaml" },
+        --
+        --   settings = {
+        --     yamllint = {
+        --       yaml = { keyOrdering = false },
+        --     },
+        --   },
+        -- },
+        --
         pylsp = {
           cmd = { "pylsp" },
           settings = {
