@@ -41,7 +41,7 @@ return {
         virt_text_priority = 100,
         use_focus = true,
       },
-      current_line_blame_formatter = "<author>, <author_time:%R> <sha> - <summary>",
+      current_line_blame_formatter = "<author>, <author_time:%R> <abbrev_sha> - <summary>",
       sign_priority = 6,
       update_debounce = 100,
       status_formatter = nil, -- Use default
@@ -67,13 +67,13 @@ return {
         -- Navigation
         map("n", "]c", function()
           if vim.wo.diff then
-            vim.cmd.normal { "]c", bang = true }
+            vim.cmd.normal { "[c", bang = true }
           else
             gitsigns.nav_hunk "next"
           end
         end, { desc = "Jump to next git [c]hange" })
 
-        map("n", "[c", function()
+        map("n", "]c", function()
           if vim.wo.diff then
             vim.cmd.normal { "[c", bang = true }
           else

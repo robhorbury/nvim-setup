@@ -12,8 +12,15 @@ return {
     end)
 
     vim.keymap.set("n", "<leader>gb", function()
-      vim.cmd "G fetch -p"
-      vim.cmd "G branch -a"
+      vim.cmd "G blame"
+    end)
+
+    vim.keymap.set("n", "<leader>gl", function()
+      vim.cmd "G log --oneline --all --decorate -50"
+    end)
+
+    vim.keymap.set("n", "<leader>gr", function()
+      vim.cmd "G reflog"
     end)
 
     vim.keymap.set("n", "<leader>p[", function()
