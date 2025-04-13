@@ -65,7 +65,7 @@ return {
       local lspconfig = require "lspconfig"
 
       local servers = {
-        codespell = true,
+        codespell = {},
         pylsp = {
           cmd = { "pylsp" },
           settings = {
