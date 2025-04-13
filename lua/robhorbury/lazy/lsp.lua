@@ -65,7 +65,43 @@ return {
       local lspconfig = require "lspconfig"
 
       local servers = {
-        shellcheck = true,
+        codespell = true,
+        pylsp = {
+          cmd = { "pylsp" },
+          settings = {
+            pylsp = {
+              plugins = {
+                pycodestyle = {
+                  enabled = true,
+                  maxLineLength = 100,
+                },
+                ruff = {
+                  enabled = true, -- Enable the plugin
+                  formatEnabled = true, -- Enable formatting using ruffs formatter
+                  --cmd = 'python -m ruff',
+                  -- executable = 'C:/Users/RobertHorbury/AppData/Local/Programs/Python/Python311/Scripts/ruff', -- Custom path to ruff
+                  unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
+                  select = { "E", "F", "UP", "B", "SIM", "I", "D", "FIX" },
+                  format = { "E", "F", "I" },
+                  ignore = { "D212", "D200", "D415" },
+                  -- Rules that are ignored when a pyproject.toml or ruff.toml is present:
+                  lineLength = 100, -- Line length to pass to ruff checking and formatting
+                  targetVersion = "py310", -- The minimum python version to target (applies for both linting and formatting).
+                },
+              },
+              flake8 = {
+                enabled = false,
+                maxLineLength = 100,
+              },
+              black = {
+                enabled = false,
+              },
+              isort = {
+                enabled = false,
+              },
+            },
+          },
+        },
         gopls = {
           settings = {
             gopls = {
@@ -110,7 +146,6 @@ return {
 
       require("mason").setup()
       local ensure_installed = {
-        "shellcheck",
         "stylua",
         "lua_ls",
       }

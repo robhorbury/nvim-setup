@@ -2,22 +2,9 @@ local setup = function()
   -- Autoformatting Setup
   local conform = require "conform"
   conform.setup {
-    formatters = {
-      ["ml-format"] = {
-        command = "./_build/_private/default/.dev-tool/ocamlformat/ocamlformat/target/bin/ocamlformat",
-        args = {
-          "--enable-outside-detected-project",
-          "--name",
-          "$FILENAME",
-          "-",
-        },
-      },
-    },
+    formatters = {},
     formatters_by_ft = {
       lua = { "stylua" },
-      blade = { "blade-formatter" },
-      ocaml = { "ml-format" },
-      ocaml_mlx = { "ocamlformat_mlx" },
     },
   }
 
