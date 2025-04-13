@@ -23,7 +23,7 @@ autocmd("TextYankPost", {
 autocmd("BufEnter", {
   group = RobHorburyGroup,
   callback = function()
-    if vim.bo.filetype == "zig" then
+    if vim.bo.filetype == "bash" then
       vim.cmd.colorscheme "tokyonight-night"
     else
       vim.cmd.colorscheme "kanagawa"
@@ -126,7 +126,6 @@ autocmd("LspAttach", {
         end,
       })
     end
-
     -- The following autocommand is used to enable inlay hints in your
     -- code, if the language server you are using supports them
     --

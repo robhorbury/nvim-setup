@@ -16,7 +16,7 @@ return {
     end)
 
     vim.keymap.set("n", "<leader>gl", function()
-      vim.cmd "G log --oneline --all --decorate -50"
+      vim.cmd "G log --oneline --all --decorate --graph -50"
     end)
 
     vim.keymap.set("n", "<leader>gr", function()
