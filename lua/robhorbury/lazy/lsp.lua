@@ -104,6 +104,9 @@ return {
               isort = {
                 enabled = false,
               },
+              pyflakes = {
+                enabled = false,
+              },
             },
           },
         },
