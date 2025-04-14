@@ -151,6 +151,7 @@ return {
 
       require("mason").setup()
       local ensure_installed = {
+        "pylsp",
         "stylua",
         "lua_ls",
       }
