@@ -41,11 +41,5 @@ return {
     vim.keymap.set("n", "<leader>pp", function()
       vim.cmd "G push"
     end)
-
-    vim.keymap.set("n", "<leader>di", function()
-      vim.cmd "Gvdiffsplit HEAD"
-      local keys = vim.api.nvim_replace_termcodes("<C-w>p", false, false, true)
-      vim.api.nvim_feedkeys(keys, "n", true)
-    end)
   end,
 }
