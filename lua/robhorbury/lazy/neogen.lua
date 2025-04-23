@@ -12,7 +12,7 @@ return {
       },
     }
 
-    vim.keymap.set("n", "<leader>df", function()
+    vim.keymap.set("n", "<leader>dm", function()
       neogen.generate { type = "func" }
       local keymap_with_termcodes_replaced = vim.api.nvim_replace_termcodes("<Esc>mfV", true, false, true)
       vim.api.nvim_feedkeys(keymap_with_termcodes_replaced, "m", false)
