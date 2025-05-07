@@ -1,4 +1,5 @@
 return {
+
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -60,6 +61,27 @@ return {
 
       local lspconfig = require "lspconfig"
 
+      -- Function to determine the correct `pylsp` path
+      local function get_pylsp_cmd()
+        -- 1. Use VIRTUAL_ENV if set
+        local venv = os.getenv "VIRTUAL_ENV"
+        if venv then
+          local pylsp_path = venv .. "/bin/pylsp"
+          if vim.fn.filereadable(pylsp_path) == 1 then
+            return { pylsp_path }
+          end
+        end
+
+        -- 2. Fallback to Mason path
+        local mason_pylsp = vim.fn.stdpath "data" .. "/mason/bin/pylsp"
+        if vim.fn.filereadable(mason_pylsp) == 1 then
+          return { mason_pylsp }
+        end
+
+        -- 3. Fallback to system pylsp
+        return { "pylsp" }
+      end
+
       local servers = {
         -- yamllint = {
         --   filetypes = { "yaml" },
@@ -72,7 +94,7 @@ return {
         -- },
         --
         pylsp = {
-          cmd = { "pylsp" },
+          cmd = get_pylsp_cmd(),
           settings = {
             pylsp = {
               plugins = {
@@ -83,8 +105,8 @@ return {
                 ruff = {
                   enabled = true, -- Enable the plugin
                   formatEnabled = true, -- Enable formatting using ruffs formatter
-                  --cmd = 'python -m ruff',
-                  -- executable = 'C:/Users/RobertHorbury/AppData/Local/Programs/Python/Python311/Scripts/ruff', -- Custom path to ruff
+                  -- cmd = "python -m ruff",
+                  -- executable = "/Users/robert.horbury/.local/share/uv/python/cpython-3.10.17-macos-aarch64-none/bin/ruff", -- Custom path to ruff
                   unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
                   select = { "E", "F", "UP", "B", "SIM", "I", "D", "FIX" },
                   format = { "E", "F", "I" },
