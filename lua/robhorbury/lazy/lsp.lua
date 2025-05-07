@@ -60,6 +60,7 @@ return {
       end
 
       local lspconfig = require "lspconfig"
+      local util = require "lspconfig.util"
 
       -- Function to determine the correct `pylsp` path
       local function get_pylsp_cmd()
@@ -82,6 +83,19 @@ return {
         return { "pylsp" }
       end
 
+      local function get_root_dir(fname)
+        local root_files = {
+          "pyproject.toml",
+          "setup.py",
+          "setup.cfg",
+          "requirements.txt",
+          ".git",
+        }
+
+        local found = vim.fs.find(root_files, { upward = true, path = fname })
+        return found[1] and vim.fs.dirname(found[1]) or vim.fs.dirname(fname)
+      end
+
       local servers = {
         -- yamllint = {
         --   filetypes = { "yaml" },
@@ -95,6 +109,7 @@ return {
         --
         pylsp = {
           cmd = get_pylsp_cmd(),
+          root_dir = get_root_dir,
           settings = {
             pylsp = {
               plugins = {
