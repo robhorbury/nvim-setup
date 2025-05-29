@@ -7,6 +7,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/nvim-nio",
       "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-go",
     },
     config = function()
       require("neotest").setup {
@@ -15,6 +16,7 @@ return {
             dap = { justMyCode = false }, -- optional: for debugging
             runner = "pytest", -- use pytest
           },
+          require "neotest-go",
         },
       }
 
