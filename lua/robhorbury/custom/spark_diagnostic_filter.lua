@@ -53,8 +53,8 @@ end
 
 vim.keymap.set("n", "<leader>nn", function()
   set_diangnostics_keymap(false)
-end)
+end, { desc = "turn off diagnositc filter" })
 
 vim.keymap.set("n", "<leader>ne", function()
   set_diangnostics_keymap(true)
-end)
+end, { desc = "turn on diagnositc filter" })

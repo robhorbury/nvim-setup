@@ -13,6 +13,6 @@ return {
 
     vim.keymap.set("n", "<leader>md", function()
       markdown.buf_toggle()
-    end)
+    end, { desc = "Toggle markdown render" })
   end,
 }

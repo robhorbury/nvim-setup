@@ -1,7 +1,7 @@
-vim.keymap.set("n", "<leader>po", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>po", vim.cmd.Ex, { desc = "exit file" })
 vim.keymap.set("n", "<leader>so", function()
   vim.cmd "so"
-end)
+end, { desc = "Source file" })
 
 vim.keymap.set({ "n" }, "<leader>ww", "<C-w>w")
 vim.keymap.set("n", "<leader>wl", "<C-w>v")

@@ -7,15 +7,15 @@ return {
     local harpoon = require "harpoon"
     harpoon:setup()
 
-    vim.keymap.set("n", "<leader>a", function()
+    vim.keymap.set("n", "<leader>w", function()
       harpoon:list():add()
-    end)
-    vim.keymap.set("n", "<leader>A", function()
+    end, { desc = "Harpoon: Append file" })
+    vim.keymap.set("n", "<leader>W", function()
       harpoon:list():prepend()
-    end)
+    end, { desc = "Harpoon: Prepend file" })
     vim.keymap.set("n", "<leader>z", function()
       harpoon:list():remove()
-    end)
+    end, { desc = "Harpoon: Remove file" })
 
     -- vim.keymap.set('n', '<leader>e', function()
     --   harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -23,37 +23,37 @@ return {
 
     vim.keymap.set("n", "<leader>a", function()
       harpoon:list():select(1)
-    end)
+    end, { desc = "Harpoon: Select file 1" })
     vim.keymap.set("n", "<leader>s", function()
       harpoon:list():select(2)
-    end)
+    end, { desc = "Harpoon: Select file 2" })
     vim.keymap.set("n", "<leader>d", function()
       harpoon:list():select(3)
-    end)
+    end, { desc = "Harpoon: Select file 3" })
     vim.keymap.set("n", "<leader>f", function()
       harpoon:list():select(4)
-    end)
+    end, { desc = "Harpoon: Select file 4" })
 
     vim.keymap.set("n", "<leader>A", function()
       harpoon:list():replace_at(1)
-    end)
+    end, { desc = "Harpoon: Replace file 1" })
     vim.keymap.set("n", "<leader>S", function()
       harpoon:list():replace_at(2)
-    end)
+    end, { desc = "Harpoon: Replace file 2" })
     vim.keymap.set("n", "<leader>D", function()
       harpoon:list():replace_at(3)
-    end)
+    end, { desc = "Harpoon: Replace file 3" })
     vim.keymap.set("n", "<leader>F", function()
       harpoon:list():replace_at(4)
-    end)
+    end, { desc = "Harpoon: Replace file 4" })
 
     -- Toggle previous & next buffers stored within Harpoon list
     vim.keymap.set("n", "<leader>[", function()
       harpoon:list():prev()
-    end)
+    end, { desc = "Harpoon: Go to previous file" })
     vim.keymap.set("n", "<leader>]", function()
       harpoon:list():next()
-    end)
+    end, { desc = "Harpoon: Go to next file" })
 
     -- basic telescope configuration
     local conf = require("telescope.config").values
@@ -82,6 +82,6 @@ return {
 
     vim.keymap.set("n", "<leader>e", function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
-    end)
+    end, { desc = "Harpoon: Open menu" })
   end,
 }

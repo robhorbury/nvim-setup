@@ -20,6 +20,6 @@ return {
       local keymap_with_termcodes_replaced_2 =
         vim.api.nvim_replace_termcodes('/"""<CR>:s/ ()//<CR>\'f', true, false, true)
       vim.api.nvim_feedkeys(keymap_with_termcodes_replaced_2, "m", false)
-    end)
+    end, { desc = "Document method" })
   end,
 }

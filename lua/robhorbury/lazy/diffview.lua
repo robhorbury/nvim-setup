@@ -6,17 +6,17 @@ return {
 
     vim.keymap.set("n", "<leader>df", function()
       vim.cmd "DiffviewOpen"
-    end)
+    end, { desc = "Open git [d]i[f]f." })
 
     vim.keymap.set("n", "<leader>di", function()
       local base = vim.fn.input("Base Object: ", "")
       local diff = vim.fn.input("Object to diff: ", "")
       vim.cmd("DiffviewOpen " .. base .. "..." .. diff)
-    end)
+    end, { desc = "[di]ff between two git objects" })
 
     vim.keymap.set("n", "<leader>dc", function()
       vim.cmd "DiffviewClose"
-    end)
+    end, { desc = "[d]iff window [c]lose" })
 
     require("diffview").setup {
 
