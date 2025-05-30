@@ -26,6 +26,34 @@ vim.keymap.set("n", "<right>", ":vertical resize +5<CR>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+vim.keymap.set("v", "R", function()
+  -- Exit visual mode first so we can capture the visual selection correctly
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+
+  -- Defer to allow <Esc> to take effect
+  vim.schedule(function()
+    local start_line = vim.fn.line "'<"
+    local end_line = vim.fn.line "'>"
+
+    local find_str = vim.fn.input "Find: "
+    if find_str == "" then
+      return
+    end
+    local replace_str = vim.fn.input "Replace: "
+
+    -- Loop through lines in visual range and do replacement
+    for lnum = start_line, end_line do
+      local line = vim.fn.getline(lnum)
+      local replaced = line:gsub(find_str, replace_str)
+      if replaced ~= line then
+        vim.fn.setline(lnum, replaced)
+      end
+    end
+
+    vim.cmd "nohlsearch"
+  end)
+end, { silent = true })
+
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
