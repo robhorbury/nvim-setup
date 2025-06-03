@@ -53,10 +53,10 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         },
         sources = cmp.config.sources {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
+          { name = "luasnip", priority = 1000 },
+          { name = "nvim_lsp", priority = 750 },
+          { name = "buffer", priority = 500 },
+          { name = "path", priority = 250 },
         },
         experimental = {
           ghost_text = cmp_ghost_text_enabled,

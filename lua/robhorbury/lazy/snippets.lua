@@ -9,6 +9,7 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
 
     config = function()
+      require "robhorbury.snippets.init"
       local ls = require "luasnip"
       ls.filetype_extend("javascript", { "jsdoc" })
 
