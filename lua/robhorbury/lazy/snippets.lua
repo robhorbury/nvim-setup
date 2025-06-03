@@ -9,9 +9,11 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
 
     config = function()
-      require "robhorbury.snippets.init"
       local ls = require "luasnip"
       ls.filetype_extend("javascript", { "jsdoc" })
+
+      local snippet_path = vim.fn.stdpath "config" .. "/lua/robhorbury/snippets"
+      require("luasnip.loaders.from_lua").load { paths = snippet_path }
 
       --- TODO: What is expand?
       vim.keymap.set({ "i" }, "<C-s>e", function()
