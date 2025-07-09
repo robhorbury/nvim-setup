@@ -20,17 +20,20 @@ autocmd("TextYankPost", {
   end,
 })
 
-autocmd("BufEnter", {
+autocmd("FileType", {
   group = RobHorburyGroup,
+  pattern = "bash",
   callback = function()
-    if vim.bo.filetype == "bash" then
-      vim.cmd.colorscheme "tokyonight-night"
-    else
-      vim.cmd.colorscheme "kanagawa"
-    end
+    ColorMyPencils "tokyonight-night"
   end,
 })
 
+autocmd("VimEnter", {
+  group = RobHorburyGroup,
+  callback = function()
+    ColorMyPencils()
+  end,
+})
 autocmd("LspAttach", {
   group = RobHorburyGroup,
   callback = function(e)
