@@ -10,7 +10,13 @@ return {
   {
     "rebelot/kanagawa.nvim",
     priority = 1000,
-    config = function() end,
+
+    config = function()
+      require("kanagawa").setup {
+        transparent = true,
+        dimInactive = false, -- optional: disable dimming of inactive windows
+      }
+    end,
   },
   {
     "folke/tokyonight.nvim",
