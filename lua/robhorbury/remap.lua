@@ -58,3 +58,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+vim.keymap.set("n", "<leader>bg", function()
+  ColorMyPencils(vim.g.colorscheme, not ThemeTransparency)
+end)
